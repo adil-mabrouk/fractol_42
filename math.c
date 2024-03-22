@@ -6,11 +6,23 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:33:51 by amabrouk          #+#    #+#             */
-/*   Updated: 2024/03/20 22:19:28 by amabrouk         ###   ########.fr       */
+/*   Updated: 2024/03/22 01:11:21 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int	create_trgb(t_fractol *f, int iters)
+{
+	int	red;
+	int	green;
+	int	blue;
+
+	red = (f->coloration * iters) % 255;
+	green = (f->coloration * 20 * iters) % 255;
+	blue = (f->coloration * 50 * iters) % 255;
+	return (red << 16 | green << 8 | blue);
+}
 
 double	to_scale(double unscaled_num, double new_min,
 			double new_max, double old_max)

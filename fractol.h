@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 17:57:40 by amabrouk          #+#    #+#             */
-/*   Updated: 2024/03/21 03:57:29 by amabrouk         ###   ########.fr       */
+/*   Updated: 2024/03/22 03:00:30 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@
 
 # define MOUSE_LEFT 1
 # define MOUSE_RIGHT 2
-# define MOUSE_ZOOM_IN 5
-# define MOUSE_ZOOM_OUT 4
-# define SPACE 49
+# define ZOOM_IN 5
+# define ZOOM_OUT 4
 # define PLUS 24
 # define MINUS 27
 # define SHIFT_RIGHT 124
@@ -63,9 +62,11 @@ typedef struct s_fractol
 	t_data		img;
 	double		escaped_value;
 	int			iter_def;
-	int			max_iters;
 	t_complex	offset;
-	
+	double		zoom;
+	int			coloration;
+	t_complex	start;
+	t_complex	end;
 }				t_fractol;
 
 
@@ -80,15 +81,16 @@ void		ft_putstr(char *s);
 
 // math prototype
 double		to_scale(double unscaled_num, double new_min, double new_max, double old_max);
-void	fractol_data(t_fractol *fractol);
+void		fractol_data(t_fractol *fractol);
 t_complex	sum_cplx(t_complex cplx1, t_complex cplx2);
 t_complex	power_cplx(t_complex cplx);
 
 // collor prototype
-void		color_pixel(int x, int y, t_data *img, int color);
+void		ft_put_pixel(int x, int y, t_data *img, int color);
+int			create_trgb(t_fractol *f, int iters);
 void		fractol_events(t_fractol *fractol);
 int			key_fun(int keycode, t_fractol *fractol);
 
-int		ft_close_window(t_fractol *fractol);
+int			ft_close_window(t_fractol *fractol);
 
 #endif
