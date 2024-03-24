@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 02:21:52 by amabrouk          #+#    #+#             */
-/*   Updated: 2024/03/22 03:39:44 by amabrouk         ###   ########.fr       */
+/*   Updated: 2024/03/24 11:15:17 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,17 @@ void	handel_pixel(int x, int y, t_fractol *fractol)
 	int			n_of_iterations;
 
 	n_of_iterations = 0;
-	z.reel = 0;
+	z.real = 0;
 	z.imaginary = 0;
-	c.reel = to_scale(x, fractol->start.reel, fractol->end.reel,
-						WIDTH) + fractol->offset.reel;
+	c.real = to_scale(x, fractol->start.real, fractol->end.real,
+						WIDTH) + fractol->offset.real;
 	c.imaginary = to_scale(y, fractol->start.imaginary, fractol->end.imaginary,
 						HEIGHT) + fractol->offset.imaginary;
+	which_fractol(fractol, &z, &c);
 	while (n_of_iterations < fractol->iter_def)
 	{
-		z = sum_cplx(power_cplx(z), c);
-		if ((z.reel * z.reel) + (z.imaginary * z.imaginary) > fractol->escaped_value)
+		z = sum_cplx(power_cplx(z, fractol), c);
+		if ((z.real * z.real) + (z.imaginary * z.imaginary) > fractol->escaped_value)
 		{
 			color = create_trgb(fractol, n_of_iterations);
 			ft_put_pixel(x, y, &fractol->img, color);
@@ -78,10 +79,16 @@ void	fractol_render(t_fractol *fractol)
 int	main(int ac, char **av)
 {
 	t_fractol	fractol;
-	if ((ac == 4 && !ft_strcmp(av[1], "julia"))
-		|| (ac == 2 && !ft_strcmp(av[1], "mandelbrot")))
+	if ((ac == 2 && !ft_strcmp(av[1], "mandelbrot"))
+		|| (ac == 4 && !ft_strcmp(av[1], "julia"))
+		|| (ac == 2 && !ft_strcmp(av[1], "tricorn")))
 	{
 		fractol.name = av[1];
+		if (!ft_strcmp(av[1], "julia"))
+		{
+			fractol.j_x = ft_atodbl(av[2], 1);
+			fractol.j_y = ft_atodbl(av[3], 1);
+		}
 		fractol_init(&fractol);
 		fractol_render(&fractol);
 		fractol_events(&fractol);

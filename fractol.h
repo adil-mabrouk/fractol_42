@@ -6,14 +6,13 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 17:57:40 by amabrouk          #+#    #+#             */
-/*   Updated: 2024/03/22 03:00:30 by amabrouk         ###   ########.fr       */
+/*   Updated: 2024/03/24 11:15:05 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #if !defined(FRACTOL_H)
 #define FRACTOL_H
-#define ERROR_MAEESAGE "Please enter :\n\t./fractol mandelbrot\nor\n\t./fractol julia <real_value> <imaginer_value>\n"
-#define ERROR_ALLOC "Allocation failed.\n"
+#define ERROR_MAEESAGE "Available Fractals :\n\t./fractol mandelbrot\nor\n\t./fractol julia <real_value> <imaginer_value>\n\t./fractol tricotn\n"
 #define ERROR_WINDOW "Something wrong in window\n"
 
 #define HEIGHT 800
@@ -31,6 +30,7 @@
 # define SHIFT_DOWN 125
 # define ESC 53
 # define ENTER 36
+# define SPACE 49
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -40,7 +40,7 @@
 
 typedef	struct s_complex
 {
-	double	reel;
+	double	real;
 	double	imaginary;
 }				t_complex;
 
@@ -67,6 +67,8 @@ typedef struct s_fractol
 	int			coloration;
 	t_complex	start;
 	t_complex	end;
+	double		j_x;
+	double		j_y;
 }				t_fractol;
 
 
@@ -78,12 +80,13 @@ void		fractol_render(t_fractol *fractol);
 // string output
 int			ft_strcmp(char *s1, char *s2);
 void		ft_putstr(char *s);
+void	which_fractol(t_fractol *fractol, t_complex *z, t_complex *c);
 
 // math prototype
 double		to_scale(double unscaled_num, double new_min, double new_max, double old_max);
 void		fractol_data(t_fractol *fractol);
 t_complex	sum_cplx(t_complex cplx1, t_complex cplx2);
-t_complex	power_cplx(t_complex cplx);
+t_complex	power_cplx(t_complex cplx, t_fractol *fractol);
 
 // collor prototype
 void		ft_put_pixel(int x, int y, t_data *img, int color);
@@ -92,5 +95,8 @@ void		fractol_events(t_fractol *fractol);
 int			key_fun(int keycode, t_fractol *fractol);
 
 int			ft_close_window(t_fractol *fractol);
+
+double		ft_atodbl(char *s, int sign);
+int			ft_atoi(char **s, int *sign);
 
 #endif
