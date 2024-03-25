@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:33:51 by amabrouk          #+#    #+#             */
-/*   Updated: 2024/03/24 10:28:12 by amabrouk         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:27:58 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_complex	sum_cplx(t_complex cplx1, t_complex cplx2)
 
 t_complex	power_cplx(t_complex cplx, t_fractol *fractol)
 {
-	t_complex res;
+	t_complex	res;
 
 	res.real = (cplx.real * cplx.real) - (cplx.imaginary * cplx.imaginary);
 	res.imaginary = 2 * cplx.real * cplx.imaginary;

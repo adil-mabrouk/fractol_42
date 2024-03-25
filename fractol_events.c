@@ -6,22 +6,23 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 03:33:32 by amabrouk          #+#    #+#             */
-/*   Updated: 2024/03/24 09:44:21 by amabrouk         ###   ########.fr       */
+/*   Updated: 2024/03/25 16:04:57 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int mouse_fun(int button, int x, int y, t_fractol *fractol)
+int	mouse_fun(int button, int x, int y, t_fractol *fractol)
 {
 	double	mouse_x;
 	double	mouse_y;
-	double		zoom;
+	double	zoom;
 
 	if (button == ZOOM_IN || button == ZOOM_OUT)
 	{
 		mouse_x = to_scale(x, fractol->start.real, fractol->end.real, WIDTH);
-		mouse_y = to_scale(y, fractol->start.imaginary, fractol->end.imaginary, HEIGHT);
+		mouse_y = to_scale(y, fractol->start.imaginary,
+				fractol->end.imaginary, HEIGHT);
 		if (button == ZOOM_IN)
 			zoom = 0.8;
 		else
@@ -29,23 +30,13 @@ int mouse_fun(int button, int x, int y, t_fractol *fractol)
 		fractol->zoom *= zoom;
 		fractol->start.real = mouse_x - (mouse_x - fractol->start.real) * zoom;
 		fractol->end.real = mouse_x + (fractol->end.real - mouse_x) * zoom;
-		fractol->start.imaginary = mouse_y - (mouse_y - fractol->start.imaginary) * zoom;
-		fractol->end.imaginary = mouse_y + (fractol->end.imaginary - mouse_y) * zoom;
+		fractol->start.imaginary = mouse_y
+			- (mouse_y - fractol->start.imaginary) * zoom;
+		fractol->end.imaginary = mouse_y
+			+ (fractol->end.imaginary - mouse_y) * zoom;
 	}
 	fractol_render(fractol);
 	return (0);
-}
-void	render_from_0(t_fractol *fractol)
-{
-	fractol->iter_def = 100;
-	fractol->offset.real = 0;
-	fractol->offset.imaginary = 0;
-	fractol->coloration = 1;
-	fractol->start.real = -2;
-	fractol->end.real = 2;
-	fractol->start.imaginary = 2;
-	fractol->end.imaginary = -2;
-	fractol_render(fractol);
 }
 
 int	ft_close_window(t_fractol *fractol)
@@ -62,11 +53,11 @@ int	key_fun(int keycode, t_fractol *fractol)
 	else if (keycode == SHIFT_LEFT)
 		fractol->offset.real -= 0.3 * fractol->zoom;
 	else if (keycode == SHIFT_UP)
-		fractol->offset.imaginary += 0.3* fractol->zoom;
+		fractol->offset.imaginary += 0.3 * fractol->zoom;
 	else if (keycode == SHIFT_DOWN)
 		fractol->offset.imaginary -= 0.3 * fractol->zoom;
 	else if (keycode == ENTER)
-		render_from_0(fractol);
+		fractol_data(fractol);
 	else if (keycode == PLUS)
 		fractol->iter_def += 10;
 	else if (keycode == MINUS)

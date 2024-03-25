@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:02:55 by amabrouk          #+#    #+#             */
-/*   Updated: 2024/03/24 11:15:56 by amabrouk         ###   ########.fr       */
+/*   Updated: 2024/03/25 22:30:32 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	which_fractol(t_fractol *fractol, t_complex *z, t_complex *c)
 
 void	fractol_data(t_fractol *fractol)
 {
-	fractol->escaped_value = 4;
-	fractol->iter_def = 100;
+	fractol->esc_val = 4;
+	fractol->iter_def = 50;
 	fractol->offset.real = 0;
 	fractol->offset.imaginary = 0;
 	fractol->zoom = 1;

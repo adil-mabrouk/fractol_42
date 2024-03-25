@@ -6,17 +6,20 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 17:57:40 by amabrouk          #+#    #+#             */
-/*   Updated: 2024/03/24 11:15:05 by amabrouk         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:24:31 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #if !defined(FRACTOL_H)
-#define FRACTOL_H
-#define ERROR_MAEESAGE "Available Fractals :\n\t./fractol mandelbrot\nor\n\t./fractol julia <real_value> <imaginer_value>\n\t./fractol tricotn\n"
-#define ERROR_WINDOW "Something wrong in window\n"
+# define FRACTOL_H
 
-#define HEIGHT 800
-#define WIDTH 800
+# define ERROR_MAEESAGE "Available Fractals :\n\n\t./fractol mandelbrot\nor\n\n\t\
+					./fractol julia <real_value> <imaginer_value>\n\n\t./fractol \
+					tricotn\n"
+# define ERROR_WINDOW "Something wrong in window\n"
+
+# define HEIGHT 800
+# define WIDTH 800
 
 # define MOUSE_LEFT 1
 # define MOUSE_RIGHT 2
@@ -38,7 +41,7 @@
 # include <math.h>
 # include "mlx.h"
 
-typedef	struct s_complex
+typedef struct s_complex
 {
 	double	real;
 	double	imaginary;
@@ -53,14 +56,13 @@ typedef struct s_data
 	int		endian;
 }				t_data;
 
-
 typedef struct s_fractol
 {
 	void		*mlx_connection;
 	void		*mlx_window;
 	char		*name;
 	t_data		img;
-	double		escaped_value;
+	double		esc_val;
 	int			iter_def;
 	t_complex	offset;
 	double		zoom;
@@ -71,31 +73,21 @@ typedef struct s_fractol
 	double		j_y;
 }				t_fractol;
 
-
-//  int	prototype
 void		fractol_init(t_fractol *fractol);
-
 void		fractol_render(t_fractol *fractol);
-
-// string output
 int			ft_strcmp(char *s1, char *s2);
 void		ft_putstr(char *s);
-void	which_fractol(t_fractol *fractol, t_complex *z, t_complex *c);
-
-// math prototype
-double		to_scale(double unscaled_num, double new_min, double new_max, double old_max);
+void		which_fractol(t_fractol *fractol, t_complex *z, t_complex *c);
+double		to_scale(double unscaled_num, double new_min, \
+					double new_max, double old_max);
 void		fractol_data(t_fractol *fractol);
 t_complex	sum_cplx(t_complex cplx1, t_complex cplx2);
 t_complex	power_cplx(t_complex cplx, t_fractol *fractol);
-
-// collor prototype
 void		ft_put_pixel(int x, int y, t_data *img, int color);
 int			create_trgb(t_fractol *f, int iters);
 void		fractol_events(t_fractol *fractol);
 int			key_fun(int keycode, t_fractol *fractol);
-
 int			ft_close_window(t_fractol *fractol);
-
 double		ft_atodbl(char *s, int sign);
 int			ft_atoi(char **s, int *sign);
 
