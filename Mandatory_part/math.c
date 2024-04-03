@@ -6,21 +6,21 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 00:33:51 by amabrouk          #+#    #+#             */
-/*   Updated: 2024/03/25 15:27:58 by amabrouk         ###   ########.fr       */
+/*   Updated: 2024/03/27 01:46:58 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	create_trgb(t_fractol *f, int iters)
+int	create_trgb(int iters)
 {
 	int	red;
 	int	green;
 	int	blue;
 
-	red = (f->coloration * iters) % 255;
-	green = (f->coloration * 3 * iters) % 255;
-	blue = (f->coloration * 5 * iters) % 255;
+	red = (iters) % 255;
+	green = (3 * iters) % 255;
+	blue = (5 * iters) % 255;
 	return (red << 16 | green << 8 | blue);
 }
 
@@ -39,13 +39,11 @@ t_complex	sum_cplx(t_complex cplx1, t_complex cplx2)
 	return (sum);
 }
 
-t_complex	power_cplx(t_complex cplx, t_fractol *fractol)
+t_complex	power_cplx(t_complex cplx)
 {
 	t_complex	res;
 
 	res.real = (cplx.real * cplx.real) - (cplx.imaginary * cplx.imaginary);
 	res.imaginary = 2 * cplx.real * cplx.imaginary;
-	if (!ft_strcmp(fractol->name, "tricorn"))
-		res.imaginary = -2 * cplx.real * cplx.imaginary;
 	return (res);
 }

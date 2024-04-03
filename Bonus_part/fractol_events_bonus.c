@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol_events.c                                   :+:      :+:    :+:   */
+/*   fractol_events_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 03:33:32 by amabrouk          #+#    #+#             */
-/*   Updated: 2024/03/25 16:04:57 by amabrouk         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:48:07 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "fractol_bonus.h"
 
 int	mouse_fun(int button, int x, int y, t_fractol *fractol)
 {

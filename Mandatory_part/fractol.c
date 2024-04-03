@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 02:21:52 by amabrouk          #+#    #+#             */
-/*   Updated: 2024/03/25 22:33:50 by amabrouk         ###   ########.fr       */
+/*   Updated: 2024/03/27 01:50:20 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,16 @@ void	handel_pixel(int x, int y, t_fractol *fractol)
 	z.real = 0;
 	z.imaginary = 0;
 	c.real = to_scale(x, fractol->start.real, fractol->end.real,
-			WIDTH) + fractol->offset.real;
+			WIDTH) * fractol->zoom;
 	c.imaginary = to_scale(y, fractol->start.imaginary, fractol->end.imaginary,
-			HEIGHT) + fractol->offset.imaginary;
-	which_fractol(fractol, &z, &c);
+			HEIGHT) * fractol->zoom;
+	if_julia(fractol, &z, &c);
 	while (n_of_iterations < fractol->iter_def)
 	{
-		z = sum_cplx(power_cplx(z, fractol), c);
+		z = sum_cplx(power_cplx(z), c);
 		if ((z.real * z.real) + (z.imaginary * z.imaginary) > fractol->esc_val)
 		{
-			color = create_trgb(fractol, n_of_iterations);
+			color = create_trgb(n_of_iterations);
 			ft_put_pixel(x, y, &fractol->img, color);
 			return ;
 		}
@@ -83,8 +83,7 @@ int	main(int ac, char **av)
 	t_fractol	fractol;
 
 	if ((ac == 2 && !ft_strcmp(av[1], "mandelbrot"))
-		|| (ac == 4 && !ft_strcmp(av[1], "julia"))
-		|| (ac == 2 && !ft_strcmp(av[1], "tricorn")))
+		|| (ac == 4 && !ft_strcmp(av[1], "julia")))
 	{
 		fractol.name = av[1];
 		if (!ft_strcmp(av[1], "julia"))
